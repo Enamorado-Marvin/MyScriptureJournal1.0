@@ -1,0 +1,78 @@
+﻿@page
+@model MyScriptureJournal.Pages.Scriptures.CreateModel
+
+@{
+    ViewData["Title"] = "Create New Entry";
+}
+
+<h2>Create New Entry</h2>
+
+<h4>Scripture</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Scripture.Title" class="control-label"></label>
+                <input asp-for="Scripture.Title" class="form-control" />
+                <span asp-validation-for="Scripture.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <!--<label asp-for="Scripture.EntryDate" class="control-label"></label> -->
+                <input type="hidden" asp-for="Scripture.EntryDate" id="date" class="form-control" />                
+                <!--<span asp-validation-for="Scripture.EntryDate" class="text-danger"></span>-->
+            </div>
+            <div class="form-group">
+                <label asp-for="Scripture.Book" class="control-label"></label>
+                <select asp-for="Scripture.Book" class="form-control">
+                    <option value="The Book of Mormon">The Book of Mormon</option>
+                    <option value="The Old Testament">The Old Testament</option>
+                    <option value="The New Testament">The New Testament</option>
+                    <option value="Doctrine and Covenants">Doctrine and Covenants</option>
+                    <option value="The Pearl of Great Price">The Pearl of Great Price</option>
+                </select>
+                <span asp-validation-for="Scripture.Book" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Scripture.ScripturePassage" class="control-label"></label>
+                <input asp-for="Scripture.ScripturePassage" class="form-control" />
+                <span asp-validation-for="Scripture.ScripturePassage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Scripture.Note" class="control-label"></label>
+                <textarea asp-for="Scripture.Note" class="form-control" rows="8"></textarea>
+                <span asp-validation-for="Scripture.Note" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+<script type="text/javascript">
+    function SetDate() {
+        var date = new Date();
+
+        var day = date.getDate();
+        var month = date.getMonth() + 1;
+        var year = date.getFullYear();
+
+        if (month < 10) month = "0" + month;
+        if (day < 10) day = "0" + day;
+
+        var today = year + "-" + month + "-" + day;
+
+
+        document.getElementById('date').value = today;
+    }
+    </script>
