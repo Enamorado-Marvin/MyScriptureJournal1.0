@@ -1,0 +1,1 @@
+# MyScriptureJournal1.0
